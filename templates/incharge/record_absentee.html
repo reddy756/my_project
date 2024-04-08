@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Record Absentee</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    form {
+        width: 60%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    select,
+    input[type="number"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    a {
+        display: block;
+        width: fit-content;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+   
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Record Absentee</h1>
+<form action="{{ url_for('incharge.record_absentee') }}" method="POST">
+    <label for="schedule">Select Schedule:</label>
+    <select name="schedule_id" id="schedule">
+        {% for schedule in schedules %}
+        <option value="{{ schedule.schedule_id }}">{{ schedule.date }} - {{ schedule.time_slot }}</option>
+        {% endfor %}
+    </select>
+    <label for="absentee_count">Number of Absentees:</label>
+    <input type="number" name="absentee_count" id="absentee_count" required>
+    <label for="reason">Reason:</label>
+    <textarea name="reason" id="reason" required></textarea>
+    <button type="submit">Record Absentee</button>
+</form>
+<a href="{{ url_for('incharge.dashboard') }}">Back to Dashboard</a>
+{% endblock %}

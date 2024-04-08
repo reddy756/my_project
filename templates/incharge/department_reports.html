@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Department Reports</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    h2 {
+        margin-top: 30px;
+        color: #007bff;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+
+    a {
+        display: block;
+        width: fit-content;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+   
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Department Reports</h1>
+<h2>Invigilation Workload</h2>
+<table>
+    <tr>
+        <th>Faculty Name</th>
+        <th>Duties Count</th>
+    </tr>
+    {% for report in workload_report %}
+    <tr>
+        <td>{{ report.name }}</td>
+        <td>{{ report.duties_count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('incharge.dashboard') }}">Back to Dashboard</a>
+{% endblock %}

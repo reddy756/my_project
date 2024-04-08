@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>View Rooms</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Custom CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 80%;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    a.button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    a.button:hover {
+        background-color: #0056b3;
+    }
+
+    form {
+        display: inline;
+    }
+
+    input[type="submit"] {
+        padding: 8px 16px;
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #c82333;
+    }
+
+    .buttons-container {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>View Rooms</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Room No</th>
+            <th>Is Available</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for room in rooms %}
+        <tr>
+            <td>{{ room.room_number }}</td>
+            <td>{{ 'Yes' if room.is_available else 'No' }}</td>
+            <td class="action-buttons">
+                <a href="{{ url_for('admin.update_room', room_id=room.room_id) }}" class="button">Update</a>
+                <form action="{{ url_for('admin.delete_room', room_id=room.room_id) }}" method="post" style="display:inline;">
+                    <input type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="buttons-container">
+    <a href="{{ url_for('admin.add_room') }}" class="button">Add Room</a>
+    <a href="{{ url_for('admin.dashboard') }}" class="button">Back to Dashboard</a>
+</div>
+{% endblock %}

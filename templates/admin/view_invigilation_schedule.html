@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Invigilation Schedule</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Custom CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color:rgb(11, 39, 249);
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th{
+        padding:5px;
+        color:rgb(206, 34, 206)
+    }
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Invigilation Schedule</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Faculty Name</th>
+            <th>Course Name</th>
+            <th>Department</th>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Room Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in schedule %}
+        <tr>
+            <td>{{ entry.faculty_name }}</td>
+            <td>{{ entry.course_name }}</td>
+            <td>{{ entry.department_name }}</td>
+            <td>{{ entry.date }}</td>
+            <td>{{ entry.time_slot }}</td>
+            <td>{{ entry.room_number }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Faculty Dashboard</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+       
+    }
+
+    h1 {
+        color:white;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+    }
+
+    nav ul li {
+        display: inline;
+        margin-right: 10px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #0056b3;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 16%;
+        height: 100%;
+        width: 200px;
+        background-color:rgb(14, 39, 226);
+        padding-top: 20px;
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 10px;
+    }
+
+    .sidebar ul li a {
+        display: block;
+        padding: 10px;
+        color: #fff;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .sidebar ul li a:hover {
+        background-color: #555;
+    }
+    .navbar {
+        background-color:black;
+        color:blue;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
+{% block header %}
+<nav class="navbar">
+    <div></div> <!-- This div is for alignment -->
+    <h1>Faculty Dashboard</h1>
+    <a id="bs" class="btn btn-danger" href ="{{ url_for('faculty.logout') }}">Logout</a>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="sidebar">
+    <ul>
+        <li><a href="{{ url_for('faculty.my_schedule') }}">My Schedule</a></li>
+        <li><a href="{{ url_for('faculty.request_adjustment') }}">Request Adjustment</a></li>
+        <li><a href="{{ url_for('faculty.report_absentee') }}">Report Absentee</a></li>
+        <li><a href="{{ url_for('faculty.adjustment_status') }}">Adjustment Status</a></li>
+        <li><a href="{{ url_for('faculty.historical_records') }}">Historical Records</a></li>
+        <li><a href="{{ url_for('faculty.submit_feedback') }}">Submit Feedback</a></li>
+        <li><a href="{{ url_for('faculty.my_statistics') }}">My Statistics</a></li>
+    </ul>
+</div>
+{% endblock %}

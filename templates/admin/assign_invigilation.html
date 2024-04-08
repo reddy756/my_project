@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Assign Invigilation</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        position: relative;
+    }
+
+    h1 {
+        text-align: center;
+        color:rgb(15, 85, 226);
+        margin-bottom: 20px;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary {
+        background-color: #1388e2;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .btn-secondary:hover {
+        background-color: #1388e2; /* Ensure the color remains the same on hover */
+    }
+    button{
+        color:white;
+        background-color: rgb(232, 19, 232);
+        border-radius: 5px;
+        padding:10px
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('admin.dashboard') }}" class="btn-secondary">Back to Dashboard</a>
+<h1>Assign Invigilation Duty</h1>
+<form action="{{ url_for('admin.submit_invigilation_assignment') }}" method="post">
+    <label for="faculty_id">Faculty:</label>
+    <select id="faculty_id" name="faculty_id">
+        {% for faculty in faculty_list %}
+        <option value="{{ faculty.faculty_id }}">{{ faculty.name }}</option>
+        {% endfor %}
+    </select><br>
+
+    <label for="course_id">Course:</label>
+    <select id="course_id" name="course_id">
+        {% for course in course_list %}
+        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+        {% endfor %}
+    </select><br>
+
+    <label for="room_id">Room:</label>
+    <select id="room_id" name="room_id">
+        {% for room in room_list %}
+        <option value="{{ room.room_id }}">{{ room.room_number }}</option>
+        {% endfor %}
+    </select><br>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required><br>
+
+    <label for="time_slot">Time Slot:</label>
+    <input type="text" id="time_slot" name="time_slot" required><br>
+
+    <button type="submit">Assign Duty</button>
+</form>
+<a href="{{ url_for('admin.view_invigilation_schedule') }}" class="btn-secondary">Back to Schedule</a>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Adjustment Status</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Custom CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        position: relative; /* Set body position to relative */
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        position: absolute; /* Set position to absolute */
+        top: 20px; /* Adjust top position */
+        right: 20px; /* Adjust right position */
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<a class="btn-danger" href="{{ url_for('faculty.dashboard') }}">Back to Dashboard</a>
+<h1>Adjustment Status</h1>
+<table border="2">
+    <thead>
+        <tr>
+            <th>Original Date</th>
+            <th>Original Time Slot</th>
+            <th>Requested Date</th>
+            <th>Requested Time Slot</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in requests %}
+        <tr>
+            <td>{{ request.original_date }}</td>
+            <td>{{ request.original_time }}</td>
+            <td>{{ request.requested_date }}</td>
+            <td>{{ request.requested_time }}</td>
+            <td>{{ request.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

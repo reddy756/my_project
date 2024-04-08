@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Admin Dashboard</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Custom CSS styles */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0; /* Fallback background color */
+        background-image: url('https://www.cazoomi.com/wp-content/uploads/2019/07/Enterprise-Automation-Challenges-and-Solutions-That-Boost-Your-Profit-Rates.png');
+        background-attachment: fixed;
+        background-size: cover;
+        overflow: hidden;
+        user-select: none;
+    }
+
+    .navbar {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .sidebar {
+        background-color:rgb(14, 181, 227); /* Blue background color */
+        color: #fff;
+        padding: 20px;
+        width: 280px;
+        height: 100vh; /* Make the sidebar full height */
+        position: fixed;
+        left: 0;
+        top: 13%;
+    }
+
+    .sidebar a {
+        margin-top: 10px;
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        margin-bottom: 10px;
+    }
+
+    .content {
+        padding: 20px;
+        margin-left: 220px; /* Adjusted for sidebar width */
+    }
+   
+</style>
+{% endblock %}
+
+{%block header%}
+<nav class="navbar">
+    <div></div> <!-- This div is for alignment -->
+    <h1>Admin Dashboard</h1>
+    <a id="bs" class="btn btn-danger" href ="{{url_for('admin.logout')}}">Logout</a>
+</nav>
+
+
+{% endblock%}
+
+{% block content %}
+
+
+<div class="sidebar">
+    <ul>
+        <li><a href="{{ url_for('admin.view_departments') }}">View Departments</a></li>
+        <li><a href="{{ url_for('admin.view_courses') }}">View Courses</a></li>
+        <li><a href="{{ url_for('admin.view_faculty') }}">View Faculty</a></li>
+        <li><a href="{{ url_for('admin.view_invigilation_schedule') }}">View Invigilation Schedule</a></li>
+        <li><a href="{{ url_for('admin.add_room') }}">Add Room</a></li>
+        <li><a href="{{ url_for('admin.view_rooms') }}">View Rooms</a></li>
+        <li><a href="{{ url_for('admin.view_invigilation_schedule') }}">View Invigilation Schedule</a></li>
+        <li><a href="{{ url_for('admin.assign_invigilation') }}">Assign Invigilation Duties</a></li>
+        <li><a href="{{ url_for('admin.view_adjustment_requests') }}">View Adjustment Requests</a></li>
+        <li><a href="{{ url_for('admin.record_absentees') }}">Record Absentees</a></li>
+        <li><a href="{{ url_for('admin.absentee_report') }}">Absentee Report</a></li>
+        <li><a href="{{ url_for('admin.invigilation_load_report') }}">Invigilation Load Report</a></li>
+        <li><a href="{{ url_for('admin.invigilation_overview') }}">Invigilation Overview</a></li>
+        <li><a href="{{ url_for('admin.automate_invigilation_allocation') }}">Automate Invigilation Allocation</a></li>
+    </ul>
+
+</div>
+<div class="content">
+    <!-- Main content of the page goes here -->
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Invigilation Overview</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Custom CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        position: relative; /* Add this */
+    }
+
+    h1,
+    h2 {
+        color: #007bff;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        position: absolute; /* Add this */
+        top: 20px; /* Add this */
+        right: 20px; /* Add this */
+        transition: background-color 0.3s ease;
+    }
+
+   
+    h2{
+        color:rgb(219, 19, 219);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a href="{{ url_for('admin.dashboard') }}">Back to Dashboard</a>
+    <h1>Invigilation Overview</h1>
+
+    <h2>Adjustment Requests</h2>
+    <table>
+        <tr>
+            <th>Status</th>
+            <th>Count</th>
+        </tr>
+        {% for stat in adjustment_requests_stats %}
+        <tr>
+            <td>{{ stat.status }}</td>
+            <td>{{ stat.count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Absentee Trends</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Count</th>
+        </tr>
+        {% for trend in absentee_trends %}
+        <tr>
+            <td>{{ trend.date }}</td>
+            <td>{{ trend.count }}</td>
+        </tr>
+        {% endfor %}
+    </table>    
+</div>
+{% endblock %}

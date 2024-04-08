@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Invigilation Load Report</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Custom CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        text-align: center;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color:rgb(213, 23, 213);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 40px;
+        margin-left: 45%;
+        transition: background-color 0.3s ease;
+       
+    }
+
+   
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Invigilation Load Report</h1>
+    <table>
+        <tr>
+            <th>Faculty Name</th>
+            <th>Duty Count</th>
+        </tr>
+        {% for faculty in load_report %}
+        <tr>
+            <td>{{ faculty.faculty_name }}</td>
+            <td>{{ faculty.duty_count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('admin.dashboard') }}">Back to Dashboard</a>
+</div>
+{% endblock %}

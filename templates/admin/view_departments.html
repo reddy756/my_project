@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>View Departments</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Custom CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color:#170dda;
+        text-align: center;
+        margin-top: 20px;
+        text-decoration:underline; 
+        font-weight:bold;
+        
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: rgb(204, 114, 204);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    /* a:hover {
+        background-color: #0056b3;
+    } */
+
+    form {
+        display: inline;
+        margin-right: 5px;
+    }
+
+    input[type="submit"] {
+        background-color: #12a9ce;
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* input[type="submit"]:hover {
+        background-color: #c82333;
+    } */
+
+    /* Positioning for links */
+    .top-right-links {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="top-right-links">
+    <a href="{{ url_for('admin.dashboard') }}">Back to Dashboard</a>
+    <a href="{{ url_for('admin.add_departments') }}">Add New Department</a>
+</div>
+
+<h1>Departments List</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Department ID</th>
+            <th>Department Name</th>
+            <th>Incharge Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for department in departments_details %}
+        <tr>
+            <td>{{ department.department_id }}</td>
+            <td>{{ department.department_name }}</td>
+            <td>{{ department.incharge_name }}</td>
+            <td>
+                <a href="{{ url_for('admin.update_department', dept_id=department.department_id) }}">Update</a>
+                <form action="{{ url_for('admin.delete_department', dept_id=department.department_id) }}" method="post">
+                    <input type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

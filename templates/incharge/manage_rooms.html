@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Manage Rooms</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+
+    form {
+        display: flex;
+        align-items: center;
+    }
+
+    button {
+        margin-left: 10px;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    a {
+        display: block;
+        width: fit-content;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+   
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Manage Rooms</h1>
+<table>
+    <tr>
+        <th>Room Number</th>
+        <th>Availability</th>
+        <th>Action</th>
+    </tr>
+    {% for room in room_list %}
+    <tr>
+        <td>{{ room.room_number }}</td>
+        <td>{{ 'Available' if room.is_available else 'Not Available' }}</td>
+        <td>
+            <form action="{{ url_for('incharge.manage_rooms', room_id=room.room_id) }}" method="POST">
+                <input type="checkbox" name="is_available" {{ 'checked' if room.is_available else '' }}> Available
+                <button type="submit">Update</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('incharge.dashboard') }}">Back to Dashboard</a>
+{% endblock %}

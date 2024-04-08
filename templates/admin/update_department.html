@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Update Department</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    /* Custom CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    form {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    select {
+    
+        width: 50%;
+        padding: 10px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    input[type="submit"],
+    a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color:rgb(223, 17, 148);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .bd {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .container {
+        position: relative;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a class="bd" href="{{ url_for('admin.view_departments') }}">Back to Departments</a>
+    <h1>Update Department</h1>
+    <form action="{{ url_for('admin.update_department', dept_id=dept_details.department_id) }}" method="post">
+        <label for="dept_name">Department Name:</label>
+        <input type="text" id="dept_name" name="dept_name" value="{{ dept_details.department_name }}" required>
+        <br>
+        <label for="incharge_id">Select Incharge:</label>
+        <select id="incharge_id" name="incharge_id">
+            <option value="" disabled selected>Select Department</option>
+            <option value="Null">Select Later</option>
+            {% for faculty in faculty %}
+            <option value="{{ faculty.user_id }}" {% if faculty.user_id==dept_details.incharge_user_id %}selected{%
+                endif %}>
+                {{ faculty.name }}
+            </option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" value="Update Department">
+    </form>
+</div>
+{% endblock %}

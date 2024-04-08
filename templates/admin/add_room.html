@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Add Room</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #0e1bb0;
+        margin-bottom: 20px;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    input[type="text"],
+    input[type="checkbox"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+   .btn{
+    color: white;
+    background-color: #007bff;
+    padding:10px
+   }
+    
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Add Room</h1>
+<form action="{{ url_for('admin.add_room') }}" method="post">
+    <label for="room_number">Room Number:</label>
+    <input type="text" id="room_number" name="room_number" required><br>
+
+    <label for="is_available">Is Available:</label>
+    <input type="checkbox" id="is_available" name="is_available" checked><br>
+
+    <button type="submit">Add Room</button>
+    <a class="btn" href="{{ url_for('admin.view_rooms') }}" class="btn-secondary">Back to Rooms List</a>
+</form>
+{% endblock %}
