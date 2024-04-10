@@ -13,7 +13,6 @@ app.config['SESSION_TYPE'] = 'FILESYSTEM'
 
 @app.route('/')
 def index():
-    execute_query("update users set Role='Faculty' where user_id in (SELECT u.user_id FROM (SELECT name, user_id,department_id FROM users WHERE role != 'Admin') AS u LEFT JOIN departments d ON u.user_id != d.incharge_user_id where u.department_id=d.department_id)",commit=True)
     return render_template('index.html')
 
 # Registering blueprints
