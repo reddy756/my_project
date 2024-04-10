@@ -142,7 +142,7 @@ def forget():
             user = execute_query("SELECT email FROM users WHERE email = %s", (email,), fetch_one=True)
 
             if user:
-                token_url = url_for('verify', token=create_token({'email': email}, salt=salt2), _external=True)
+                token_url = url_for('auth.verify', token=create_token({'email': email}, salt=salt2), _external=True)
                 subject = 'Password Reset Link'
                 body = f'Dear User,\nPlease use the following link to reset your password:\n{token_url}'
 

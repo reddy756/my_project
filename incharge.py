@@ -117,11 +117,14 @@ GROUP BY f.faculty_id, u.name;
 @incharge_bp.route('/message_faculty', methods=['GET', 'POST'])
 def message_faculty():
     if 'role' in session and session['role'] == 'Department Incharge':
+        incharge_name = execute_query("SELECT u.name FROM faculty f JOIN users u ON f.user_id = u.user_id WHERE u.user_id =%s", (session.get('user_id'),),fetch_one=True)['name']
         if request.method == 'POST':
             faculty_id = request.form.get('faculty_id')
             message = request.form.get('message')
+            subject = f"Message From {incharge_name}"
+            faculty_email = execute_query("SELECT u.email FROM faculty f JOIN users u ON f.user_id = u.user_id WHERE f.faculty_id =%s", (faculty_id,),fetch_one=True)['email']
             # Example function to send a message (implementation depends on your system's communication method)
-            send_message(faculty_id, message)
+            send_email(receiver_email=faculty_email,subject=subject, body=message)
             flash('Message sent successfully.')
             return redirect(url_for('incharge.message_faculty'))
 
@@ -131,6 +134,7 @@ def message_faculty():
         flash('Access denied. Please login as a department incharge.')
         return redirect(url_for('auth.login'))
 
+        
 @incharge_bp.route('/manage_rooms', methods=['GET', 'POST'])
 def manage_rooms():
     if 'role' in session and session['role'] == 'Department Incharge':
