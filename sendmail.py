@@ -3,7 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import os
-os.chdir('/home/Bhaskar08/Exam/')
+os.chdir(os.path.abspath(os.path.dirname(__file__)))
 load_dotenv()
 # sender_email = 'dbsreddy3@gmail.com'
 # password = 'cgoz svad gpwp lbqv'

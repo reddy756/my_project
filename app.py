@@ -6,7 +6,7 @@ from incharge import incharge_bp
 from faculty import faculty_bp
 from database import execute_query
 import os
-os.chdir('/home/Bhaskar08/Exam/')
+os.chdir(os.path.abspath(os.path.dirname(__file__)))
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
 app.config['SESSION_TYPE'] = 'FILESYSTEM'

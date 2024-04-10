@@ -4,7 +4,7 @@ from key import secret_key
 import os
 from dotenv import load_dotenv
 import os
-os.chdir('/home/Bhaskar08/Exam/')
+os.chdir(os.path.abspath(os.path.dirname(__file__)))
 load_dotenv()
 serializer = URLSafeTimedSerializer(secret_key)
 

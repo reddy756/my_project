@@ -2,7 +2,7 @@ from mysql.connector.pooling import MySQLConnectionPool
 import os
 from dotenv import load_dotenv
 import os
-os.chdir('/home/Bhaskar08/Exam/')
+os.chdir(os.path.abspath(os.path.dirname(__file__)))
 load_dotenv()
 
 # Database configuration
